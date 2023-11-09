@@ -62,7 +62,7 @@ export default function Component() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/image");
+                router.push("/image-edit");
               }}
             >
               시작하기
@@ -87,7 +87,7 @@ export default function Component() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/image");
+                router.push("/image-create");
               }}
             >
               시작하기
