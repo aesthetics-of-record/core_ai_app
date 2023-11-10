@@ -198,7 +198,7 @@ export function ImageDropzone() {
                 <div
                   key={color}
                   style={{ backgroundColor: color }}
-                  className="rounded-full w-24 h-24"
+                  className="rounded-full w-18 h-18 sm:w-24 sm:h-24"
                 ></div>
               );
             })}
