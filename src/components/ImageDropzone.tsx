@@ -121,7 +121,7 @@ export function ImageDropzone() {
                 console.log(res.url);
                 setApiLoading1(true);
                 axios
-                  .post(apiOrigin + "/api/v1/persnal-branding", {
+                  .post(apiOrigin + "/api/v1/personal-branding", {
                     url: res.url,
                   })
                   .then((res2) => {
@@ -129,7 +129,7 @@ export function ImageDropzone() {
                     setPersnals(res2.data);
                     setApiLoading2(true);
                     axios
-                      .post(apiOrigin + "/api/v1/persnal-color", {
+                      .post(apiOrigin + "/api/v1/personal-color", {
                         url: res.url,
                       })
                       .then((res3) => {
