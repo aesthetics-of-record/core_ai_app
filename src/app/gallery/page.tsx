@@ -1,7 +1,7 @@
 const Page = () => {
   return (
-    <div>
-      <div>갤러리</div>
+    <div className="p-4">
+      <div>미완성</div>
     </div>
   );
 };

@@ -123,10 +123,11 @@ export function ImageDropzone() {
                 axios
                   .post(apiOrigin + "/api/v1/personal-branding", {
                     url: res.url,
+                    phone: "01027587181",
                   })
                   .then((res2) => {
                     setApiLoading1(false);
-                    setPersnals(res2.data);
+                    setPersnals(res2.data.pcResponses);
                     setApiLoading2(true);
                     axios
                       .post(apiOrigin + "/api/v1/personal-color", {
@@ -135,8 +136,8 @@ export function ImageDropzone() {
                       .then((res3) => {
                         toast.success("성공!");
                         setApiLoading2(false);
-                        setColors(res3.data);
-                        console.log(res3.data);
+                        setColors(res3.data.codes);
+                        console.log(res3.data.codes);
                         setApiLoading(false);
                       })
                       .catch((err) => {
