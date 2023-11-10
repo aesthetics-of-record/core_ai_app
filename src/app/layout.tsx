@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/themeProvider";
 import Header from "@/components/header/Header";
 import SideLayout from "@/components/side/SideLayout";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { Toaster } from "react-hot-toast";
 
 const font = Poppins({ subsets: ["latin"], weight: ["600"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             <Header>
               <SideLayout>{children}</SideLayout>
             </Header>
+            <Toaster />
           </ThemeProvider>
         </EdgeStoreProvider>
       </body>

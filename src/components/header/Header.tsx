@@ -29,7 +29,14 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <div className="block md:hidden">
             <SheetSide />
           </div>
-          <div>Logo</div>
+          <div
+            className="opacity-80 hover:opacity-100 cursor-pointer"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            Logo
+          </div>
         </div>
 
         <div className="flex justify-center items-center gap-x-4">

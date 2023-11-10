@@ -57,7 +57,7 @@ const Page = () => {
         </CardHeader>
         <CardContent>
           <SingleImageDropzone
-            height={200}
+            height={350}
             value={file}
             onChange={(file) => {
               setFile(file);
@@ -81,6 +81,8 @@ const Page = () => {
                 axios
                   .post(apiOrigin + "/api/v1/images", { url: res.url })
                   .then((res2) => {
+                    console.log(res2);
+                    toast.success("성공!");
                     setApiLoading(false);
                   })
                   .catch((err) => {

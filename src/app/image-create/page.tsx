@@ -1,48 +1,31 @@
 "use client";
 
+import ImageDownloader from "@/components/ImageDownloader";
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Textarea } from "@/components/ui/textarea";
 import { apiOrigin } from "@/configs/urls";
-import { useEdgeStore } from "@/lib/edgestore";
+import { cn } from "@/lib/utils";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { RiImageAddFill } from "react-icons/ri";
-import { BeatLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 const Page = () => {
-  const [file, setFile] = useState<File>();
-  const { edgestore } = useEdgeStore();
   const [apiLoading, setApiLoading] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState<string>("");
-
-  const Loading = () => {
-    return (
-      <div>
-        {progress ? <Progress value={progress} className="" /> : null}
-        {progress === 100 ? <div className="h-4" /> : null}
-        {progress === 100 ? (
-          <div className="font-bold text-center">이미지 업로드 완료</div>
-        ) : null}
-        {progress === 100 && apiLoading ? (
-          <div className="">
-            <div>이미지 생성 중...</div>
-            <BeatLoader color="#36d7b7" />
-          </div>
-        ) : null}
-      </div>
-    );
-  };
+  const [prompt, setPrompt] = useState<string>("");
+  const [resultPrompt, setResultPrompt] = useState<string>("");
 
   return (
     <div className="p-4">
@@ -54,55 +37,76 @@ const Page = () => {
             </div>
             <div>Text To Image</div>
           </CardTitle>
-          <CardDescription>여러분의 사진을 올려주세요.</CardDescription>
+          <CardDescription>
+            만들고 싶은 이미지에 대해 설명해 주세요.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <SingleImageDropzone
-            height={200}
-            value={file}
-            onChange={(file) => {
-              setFile(file);
+          <Textarea
+            className="resize-none h-[300px]"
+            value={prompt}
+            onChange={(e) => {
+              setPrompt(e.target.value);
             }}
           />
           <div className="h-6" />
           <Button
-            className="w-full"
+            disabled={apiLoading}
+            className={cn("w-full")}
             onClick={async () => {
-              if (file) {
-                const res = await edgestore.publicFiles.upload({
-                  file,
-                  onProgressChange: (progress) => {
-                    console.log(progress);
-                    setProgress(progress);
-                  },
-                });
-
-                console.log(res.url);
-                setApiLoading(true);
-                axios
-                  .post(apiOrigin + "/api/v1/prompt", {
-                    prompt: "치킨을 먹고있는 사람을 그려줘",
-                  })
-                  .then((res2) => {
-                    console.log(res2.data.data[0]);
-                    setImageUrl(res2.data.data[0].url);
-                    setApiLoading(false);
-                  })
-                  .catch((err) => {
-                    toast.error("에러가 발생했습니다.");
-                    toast.error("다시 시도해주십시오.");
-                  });
+              if (prompt.length <= 6) {
+                toast.error("최소한 7글자 이상의 지시문을 입력 해 주세요.");
+                return;
               }
+
+              if (prompt.length >= 500) {
+                toast.error("500글자 미만의 지시문을 입력 해 주세요.");
+                return;
+              }
+
+              setApiLoading(true);
+              axios
+                .post(apiOrigin + "/api/v1/prompt", {
+                  prompt: prompt,
+                })
+                .then((res2) => {
+                  console.log(res2.data.data[0]);
+                  setResultPrompt(prompt);
+                  setImageUrl(res2.data.data[0].url);
+                  setApiLoading(false);
+                  setPrompt("");
+                })
+                .catch((err) => {
+                  toast.error("에러가 발생했습니다.");
+                  toast.error("다시 시도해주십시오.");
+                });
             }}
           >
-            업로드
+            {apiLoading ? <ClipLoader color="#36d7b7" size={16} /> : "전송"}
           </Button>
         </CardContent>
       </Card>
+      <div className="h-4" />
 
-      <div>
-        <Image src={imageUrl} alt="image" width={200} height={200}></Image>
-      </div>
+      {imageUrl !== "" ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex gap-2">
+              <div>
+                <RiImageAddFill />
+              </div>
+              <div>생성된 이미지</div>
+            </CardTitle>
+            <CardDescription>지시문 : {resultPrompt}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="relative aspect-square">
+              <Image src={imageUrl} alt="image" fill></Image>
+            </div>
+          </CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+      ) : null}
     </div>
   );
 };

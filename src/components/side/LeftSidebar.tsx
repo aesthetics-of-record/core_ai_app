@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import Box from "../Box";
 import { HiHome } from "react-icons/hi";
-import { BsFillPersonCheckFill } from "react-icons/bs";
+import { BsFillPersonCheckFill, BsImages } from "react-icons/bs";
 import { RiImageEditFill, RiImageAddFill } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
@@ -42,6 +42,12 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ className }) => {
         active: pathname === "/image-create",
         href: "/image-create",
       },
+      {
+        icon: BsImages,
+        label: "갤러리",
+        active: pathname === "/gallery",
+        href: "/gallery",
+      },
     ],
     [pathname]
   );
@@ -51,11 +57,15 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ className }) => {
       <div className="flex flex-col gap-y-2 h-screen w-[250px] border-r">
         <Box className="h-full px-5">
           <div className="flex flex-col gap-y-2 px-5 py-4">
-            {routes.map((item) => (
-              <SidebarItem key={item.label} {...item}></SidebarItem>
-            ))}
+            {routes.map((item: any) => {
+              return (
+                <>
+                  <SidebarItem key={item.label} {...item}></SidebarItem>
+                  {item.href === "/image-create" ? <Separator /> : null}
+                </>
+              );
+            })}
           </div>
-          <Separator />
         </Box>
       </div>
     </div>

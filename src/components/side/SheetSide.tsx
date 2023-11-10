@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Sheet,
@@ -9,24 +9,20 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
-import { Button } from '../ui/button';
-import LeftSidebar from './LeftSidebar';
-import { LucideAlignJustify } from 'lucide-react';
+} from "@/components/ui/sheet";
+import { Button } from "../ui/button";
+import LeftSidebar from "./LeftSidebar";
+import { LucideAlignJustify } from "lucide-react";
 
 const SheetSide = () => {
   return (
-    <Sheet key={'left'}>
+    <Sheet key={"left"}>
       <SheetTrigger asChild>
-        <Button
-          variant="outline"
-          size={'icon'}
-          className="rounded-full p-2"
-        >
+        <Button variant="outline" size={"icon"} className="rounded-full p-2">
           <LucideAlignJustify width={16} />
         </Button>
       </SheetTrigger>
-      <SheetContent side={'left'}>
+      <SheetContent side={"left"} className="w-fit p-0">
         <LeftSidebar />
       </SheetContent>
     </Sheet>

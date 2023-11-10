@@ -94,6 +94,31 @@ export default function Component() {
             </Button>
           </CardFooter>
         </Card>
+        <Card className="hover:opacity-80">
+          <CardHeader>
+            <CardTitle className="flex gap-2">
+              <div>
+                <RiImageEditFill />
+              </div>
+              <div>Gallery</div>
+            </CardTitle>
+            <CardDescription>
+              지금까지 만들어진 이미지들을 확인 해 보세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent></CardContent>
+          <CardFooter className="flex justify-between">
+            {/* <Button variant="outline">Cancel</Button> */}
+            <div></div>
+            <Button
+              onClick={() => {
+                router.push("/gallery");
+              }}
+            >
+              시작하기
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );
