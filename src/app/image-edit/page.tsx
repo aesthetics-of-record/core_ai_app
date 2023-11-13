@@ -17,7 +17,7 @@ import { BsFillPersonCheckFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { RiImageEditFill } from "react-icons/ri";
 import { Progress } from "@/components/ui/progress";
-import { BeatLoader } from "react-spinners";
+import { BeatLoader, ClipLoader } from "react-spinners";
 import Image from "next/image";
 
 const Page = () => {
@@ -67,9 +67,11 @@ const Page = () => {
           />
           <div className="h-6" />
           <Button
+            disabled={apiLoading}
             className="w-full"
             onClick={async () => {
               if (file) {
+                setImageUrl("");
                 const res = await edgestore.publicFiles.upload({
                   file,
                   onProgressChange: (progress) => {
@@ -96,7 +98,7 @@ const Page = () => {
               }
             }}
           >
-            업로드
+            {apiLoading ? <ClipLoader color="#36d7b7" size={16} /> : "업로드"}
           </Button>
         </CardContent>
       </Card>
