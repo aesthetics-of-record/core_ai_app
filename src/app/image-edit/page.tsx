@@ -18,12 +18,14 @@ import toast from "react-hot-toast";
 import { RiImageEditFill } from "react-icons/ri";
 import { Progress } from "@/components/ui/progress";
 import { BeatLoader } from "react-spinners";
+import Image from "next/image";
 
 const Page = () => {
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const [apiLoading, setApiLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const Loading = () => {
     return (
@@ -34,8 +36,8 @@ const Page = () => {
           <div className="font-bold text-center">이미지 업로드 완료</div>
         ) : null}
         {progress === 100 && apiLoading ? (
-          <div className="">
-            <div>이미지 생성 중...</div>
+          <div className="text-center">
+            <div>이미지 변형 중...</div>
             <BeatLoader color="#36d7b7" />
           </div>
         ) : null}
@@ -82,8 +84,10 @@ const Page = () => {
                   .post(apiOrigin + "/api/v1/images", { url: res.url })
                   .then((res2) => {
                     console.log(res2);
+                    setImageUrl(res2.data.output[0]);
                     toast.success("성공!");
                     setApiLoading(false);
+                    setProgress(0);
                   })
                   .catch((err) => {
                     toast.error("에러가 발생했습니다.");
@@ -96,6 +100,27 @@ const Page = () => {
           </Button>
         </CardContent>
       </Card>
+
+      <div className="h-4" />
+      {imageUrl === "" ? <Loading /> : null}
+
+      {imageUrl !== "" ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex gap-2">
+              <div>
+                <RiImageEditFill />
+              </div>
+              <div>생성된 이미지</div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="relative aspect-square">
+              <Image src={imageUrl} alt="image" fill></Image>
+            </div>
+          </CardContent>
+        </Card>
+      ) : null}
     </div>
   );
 };

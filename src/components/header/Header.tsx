@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/ui/button";
 import { ThemeMenu } from "./ThemeMenu";
 import SheetSide from "../side/SheetSide";
+import Image from "next/image";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -35,7 +36,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               router.push("/");
             }}
           >
-            Logo
+            <Image
+              src={"/images/core_logo.png"}
+              alt="logo"
+              width={40}
+              height={40}
+            />
           </div>
         </div>
 

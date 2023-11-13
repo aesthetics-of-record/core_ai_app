@@ -1,5 +1,6 @@
 "use client";
 
+import { createImage } from "@/actions/images";
 import ImageDownloader from "@/components/ImageDownloader";
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { apiOrigin } from "@/configs/urls";
-import { cn } from "@/lib/utils";
+import { cn, convertURLtoFile } from "@/lib/utils";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
@@ -69,7 +70,11 @@ const Page = () => {
                 .post(apiOrigin + "/api/v1/prompt", {
                   prompt: prompt,
                 })
-                .then((res2) => {
+                .then(async (res2) => {
+                  // const file = await convertURLtoFile(res2.data.data[0].url);
+                  // console.log(file);
+                  createImage(res2.data.data[0].url, prompt).then();
+
                   console.log(res2.data.data[0]);
                   setResultPrompt(prompt);
                   setImageUrl(res2.data.data[0].url);

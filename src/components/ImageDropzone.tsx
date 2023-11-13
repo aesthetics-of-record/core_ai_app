@@ -32,6 +32,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Input } from "./ui/input";
+import { createImage } from "@/actions/images";
 
 export function ImageDropzone() {
   const [file, setFile] = useState<File>();
@@ -190,15 +191,15 @@ export function ImageDropzone() {
           </CardHeader>
           <CardContent className="flex gap-4">
             {colors.map((color: string) => {
-              const regex = /^\#/;
-              if (!regex.test(color)) {
-                color = "#" + color;
-              }
+              // const regex = /^\#/;
+              // if (!regex.test(color)) {
+              //   color = "#" + color;
+              // }
               return (
                 <div
                   key={color}
                   style={{ backgroundColor: color }}
-                  className="rounded-full w-18 h-18 sm:w-24 sm:h-24"
+                  className="rounded-full w-12 h-12 sm:w-24 sm:h-24"
                 ></div>
               );
             })}
@@ -227,8 +228,21 @@ export function ImageDropzone() {
                 prompt: prompt,
               })
               .then((res) => {
+                createImage(res.data.data[0].url, prompt).then();
+
                 setImageUrl(res.data.data[0].url);
                 setApiLoading3(false);
+
+                axios
+                  .post(apiOrigin + "/api/v1/send-message", {
+                    phone: e.target.phone.value,
+                    color: persnals[0].content,
+                    comment: persnals[1].content,
+                    clothesColor: persnals[2].content,
+                    clothesType: persnals[3].content,
+                  })
+                  .then()
+                  .catch((err) => {});
               });
           }}
         >
@@ -246,7 +260,7 @@ export function ImageDropzone() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Select name="gender">
+              <Select name="gender" required={true}>
                 <SelectTrigger>
                   <SelectValue placeholder="성별을 선택 해 주세요." />
                 </SelectTrigger>
@@ -263,6 +277,15 @@ export function ImageDropzone() {
                 name="age"
                 placeholder="나이를 입력 해 주세요."
                 type="number"
+                required={true}
+              />
+              <div className="h-4" />
+
+              <Input
+                name="phone"
+                placeholder="퍼스널 컬러 진단 결과를 받을 폰번호 입력(선택)"
+                type="tel"
+                required={false}
               />
             </CardContent>
             <CardFooter>
@@ -270,7 +293,7 @@ export function ImageDropzone() {
                 {apiLoading3 ? (
                   <ClipLoader color="#36d7b7" size={16} />
                 ) : (
-                  "퍼스널 컬러를 바탕으로 이미지 생성하기"
+                  "퍼스널 이미지 생성 및 결과문자 보내기"
                 )}
               </Button>
             </CardFooter>
