@@ -1,10 +1,19 @@
-"use server";
+'use server';
 
-import { db } from "@/lib/db";
+import { db } from '@/lib/db';
 
 export const getAllImages = async (): Promise<any> => {
-  const images = await db.image.findMany();
-  return images;
+  try {
+    console.log('뭐가문제');
+    const images = await db.image.findMany();
+    console.log('뭐가문제2');
+
+    return images;
+  } catch {
+    (err: any) => {
+      throw new Error(err);
+    };
+  }
 };
 
 export const getSomeImages = async (n: number): Promise<any> => {
@@ -12,7 +21,7 @@ export const getSomeImages = async (n: number): Promise<any> => {
     const images = await db.image.findMany({
       take: n,
       orderBy: {
-        id: "desc",
+        id: 'desc',
       },
     });
     return images;
