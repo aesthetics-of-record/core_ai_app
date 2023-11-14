@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { apiOrigin } from "@/configs/urls";
+import { db } from "@/lib/db";
 import { cn, convertURLtoFile } from "@/lib/utils";
 import axios from "axios";
 import Image from "next/image";
@@ -71,9 +72,14 @@ const Page = () => {
                   prompt: prompt,
                 })
                 .then(async (res2) => {
-                  // const file = await convertURLtoFile(res2.data.data[0].url);
-                  // console.log(file);
-                  createImage(res2.data.data[0].url, prompt).then();
+                  createImage(res2.data.data[0].url, prompt)
+                    .then((image) => {
+                      console.log("db저장 성공");
+                      console.log(image);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
 
                   console.log(res2.data.data[0]);
                   setResultPrompt(prompt);
