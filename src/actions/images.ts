@@ -4,9 +4,7 @@ import { db } from '@/lib/db';
 
 export const getAllImages = async (): Promise<any> => {
   try {
-    console.log('뭐가문제');
     const images = await db.image.findMany();
-    console.log('뭐가문제2');
 
     return images;
   } catch {
