@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,10 +8,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { useRouter } from "next/navigation";
-import { BsFillPersonCheckFill } from "react-icons/bs";
-import { RiImageEditFill } from "react-icons/ri";
+} from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
+import { BsFillPersonCheckFill } from 'react-icons/bs';
+import { RiImageEditFill } from 'react-icons/ri';
 
 export default function Component() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function Component() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/persnal");
+                router.push('/persnal');
               }}
             >
               시작하기
@@ -62,7 +62,7 @@ export default function Component() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/image-edit");
+                router.push('/image-edit');
               }}
             >
               시작하기
@@ -87,14 +87,14 @@ export default function Component() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/image-create");
+                router.push('/image-create');
               }}
             >
               시작하기
             </Button>
           </CardFooter>
         </Card>
-        <Card className="hover:opacity-80">
+        {/* <Card className="hover:opacity-80">
           <CardHeader>
             <CardTitle className="flex gap-2">
               <div>
@@ -108,7 +108,6 @@ export default function Component() {
           </CardHeader>
           <CardContent></CardContent>
           <CardFooter className="flex justify-between">
-            {/* <Button variant="outline">Cancel</Button> */}
             <div></div>
             <Button
               onClick={() => {
@@ -118,7 +117,7 @@ export default function Component() {
               시작하기
             </Button>
           </CardFooter>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );
