@@ -57,7 +57,7 @@ export function AiTable({ aiList }: { aiList: any }) {
         <TableBody className="grid grid-cols-2">
           {randomAiNameList.map((randomAi: any, index: number) => {
             return (
-              <TableCell>
+              <TableCell key={index}>
                 {index + 1}. {randomAi.name}
               </TableCell>
             );
