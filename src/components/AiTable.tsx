@@ -34,8 +34,9 @@ export function AiTable({ aiList }: { aiList: any }) {
 
   useEffect(() => {
     let randomList = [];
+    let arr = [...aiList];
     for (let i = 0; i < aiList.length; i++) {
-      let randomElement = popRandomElement([...aiList]);
+      let randomElement = popRandomElement(arr);
       randomList.push(randomElement);
     }
     console.log(randomList);
