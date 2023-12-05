@@ -45,17 +45,6 @@ export default function Component() {
           <CardContent>
             <AiTable aiList={aiList} />
           </CardContent>
-          <CardFooter className="flex justify-between">
-            {/* <Button variant="outline">Cancel</Button> */}
-            <div></div>
-            <Button
-              onClick={() => {
-                router.push("/aigame");
-              }}
-            >
-              정답맞추기
-            </Button>
-          </CardFooter>
         </Card>
       </div>
     </div>
