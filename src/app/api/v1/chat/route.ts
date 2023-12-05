@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { apiOrigin } from "@/configs/urls";
 import axios from "axios";
 
