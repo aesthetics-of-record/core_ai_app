@@ -17,6 +17,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 export function ChatDialog({
   children,
@@ -115,6 +116,20 @@ export function ChatDialog({
                     setChatList(copy2);
                     setLoading(false);
                     setValue("");
+                  })
+                  .catch((err) => {
+                    const copy2 = [...copy];
+                    copy2[index] = [
+                      ...copy2[index],
+                      {
+                        role: "ai",
+                        message: "🥵메세지 전송 중 에러발생 다시보내주세요.",
+                      },
+                    ];
+                    setChatList(copy2);
+                    setLoading(false);
+                    setValue("");
+                    toast.error("메세지를 다시 보내 주세요.");
                   });
               }}
             >
