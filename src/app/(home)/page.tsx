@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { BsFillPersonCheckFill } from "react-icons/bs";
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
 
   return (
