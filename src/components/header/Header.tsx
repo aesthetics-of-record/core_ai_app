@@ -36,12 +36,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               router.push("/");
             }}
           >
-            <Image
-              src={"/images/core_logo.png"}
-              alt="logo"
-              width={40}
-              height={40}
-            />
+            <p>Logo</p>
           </div>
         </div>
 

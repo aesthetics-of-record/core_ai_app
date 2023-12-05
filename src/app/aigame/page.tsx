@@ -1,5 +1,6 @@
 "use client";
 
+import { AiTable } from "@/components/AiTable";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,16 +10,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { aiListState } from "@/recoil/store";
+import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BsFillPersonCheckFill } from "react-icons/bs";
+import { useRecoilState } from "recoil";
 
-export default function page() {
+export default function Component() {
+  const [aiList, setAiList] = useRecoilState<any>(aiListState);
   const router = useRouter();
+
+  useEffect(() => {
+    axios.get("/api/game/start").then((res) => {
+      setAiList(res.data);
+    });
+  }, []);
 
   return (
     <div className="p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        <Card className="hover:opacity-80">
+      <div className="max-w-lg m-auto">
+        <Card className="">
           <CardHeader>
             <CardTitle className="flex gap-2">
               <div>
@@ -30,7 +42,9 @@ export default function page() {
               현재 AI들이 어떤 캐릭터를 연기하고 있는 지 맞춰보세요.
             </CardDescription>
           </CardHeader>
-          <CardContent></CardContent>
+          <CardContent>
+            <AiTable aiList={aiList} />
+          </CardContent>
           <CardFooter className="flex justify-between">
             {/* <Button variant="outline">Cancel</Button> */}
             <div></div>
@@ -39,7 +53,7 @@ export default function page() {
                 router.push("/aigame");
               }}
             >
-              시작하기
+              정답맞추기
             </Button>
           </CardFooter>
         </Card>
