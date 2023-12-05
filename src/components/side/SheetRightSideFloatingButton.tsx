@@ -21,7 +21,7 @@ const SheetRightSideFloatingButton = () => {
         <Button
           variant="outline"
           size={"icon"}
-          className="rounded-full p-2 fixed right-8 bottom-8 shadow-md shadow-primary"
+          className="rounded-full p-2 shadow-md shadow-primary"
         >
           <IoIosImages width={16} />
         </Button>
