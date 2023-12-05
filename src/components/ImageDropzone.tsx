@@ -14,7 +14,7 @@ import {
 } from "./ui/card";
 import { BsFillPersonCheckFill, BsPersonBoundingBox } from "react-icons/bs";
 import { VscSymbolColor } from "react-icons/vsc";
-import { PersnalTable } from "./AiTable";
+import { PersnalTable } from "./PersnalTable";
 import axios from "axios";
 import { apiOrigin } from "@/configs/urls";
 import { Progress } from "./ui/progress";
