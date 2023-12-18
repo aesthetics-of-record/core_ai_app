@@ -36,7 +36,7 @@ export default function Page() {
             <div></div>
             <Button
               onClick={() => {
-                router.push("/aigame");
+                router.push("/aigame/select");
               }}
             >
               시작하기

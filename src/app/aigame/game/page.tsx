@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { aiListState } from "@/recoil/store";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsFillPersonCheckFill } from "react-icons/bs";
 import { useRecoilState } from "recoil";
@@ -20,11 +20,19 @@ import { useRecoilState } from "recoil";
 export default function Component() {
   const [aiList, setAiList] = useRecoilState<any>(aiListState);
   const router = useRouter();
+  const params = useSearchParams();
+  // console.log(params.get("count"));
 
   useEffect(() => {
-    axios.get("/api/game/start").then((res) => {
-      setAiList(res.data);
-    });
+    axios
+      .get(
+        `/api/game/start?count=${params.get("count")}&category=${params.get(
+          "category"
+        )}`
+      )
+      .then((res) => {
+        setAiList(res.data);
+      });
   }, []);
 
   return (
