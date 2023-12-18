@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 import { ThemeProvider } from "@/providers/themeProvider";
 import Header from "@/components/header/Header";
 import SideLayout from "@/components/side/SideLayout";
-import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/providers/Providers";
 
@@ -24,15 +23,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <Providers>
-          <EdgeStoreProvider>
-            <ThemeProvider>
-              <Header>
-                <SideLayout>{children}</SideLayout>
-              </Header>
-              <Toaster />
-              {/* <SheetRightSideFloatingButton /> */}
-            </ThemeProvider>
-          </EdgeStoreProvider>
+          <ThemeProvider>
+            <Header>
+              <SideLayout>{children}</SideLayout>
+            </Header>
+            <Toaster />
+            {/* <SheetRightSideFloatingButton /> */}
+          </ThemeProvider>
         </Providers>
       </body>
     </html>

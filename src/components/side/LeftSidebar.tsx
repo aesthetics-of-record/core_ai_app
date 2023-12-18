@@ -27,7 +27,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ className }) => {
       {
         icon: BsFillPersonCheckFill,
         label: "AI맞추기",
-        active: pathname === "/aigame.select" || pathname === "/aigame/game",
+        active: pathname === "/aigame/select" || pathname === "/aigame/game",
         href: "/aigame/select",
       },
       // {
