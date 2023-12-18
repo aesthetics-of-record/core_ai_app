@@ -102,9 +102,6 @@ export function AiTable({ aiList }: { aiList: any }) {
       <div className="h-10" />
       <Table>
         <TableCaption>Ai 들이 누구인지 맞춰보세요.</TableCaption>
-        <TableCaption className="text-sm text-zinc-500">
-          주의 : ~~~
-        </TableCaption>
 
         <TableHeader>
           <TableRow>
