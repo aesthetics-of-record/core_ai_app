@@ -4,11 +4,12 @@ import { useMemo } from "react";
 import Box from "../Box";
 import { HiHome } from "react-icons/hi";
 import { BsFillPersonCheckFill, BsImages } from "react-icons/bs";
-import { RiImageEditFill, RiImageAddFill } from "react-icons/ri";
+import { IoMdPersonAdd } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
 import { cn } from "@/lib/utils";
 import { Separator } from "../ui/separator";
+import { FaKey } from "react-icons/fa";
 
 interface LeftSidebarProps {
   className?: string;
@@ -26,9 +27,21 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ className }) => {
       },
       {
         icon: BsFillPersonCheckFill,
-        label: "AI맞추기",
-        active: pathname === "/aigame/select" || pathname === "/aigame/game",
-        href: "/aigame/select",
+        label: "로그인",
+        active: pathname === "/login",
+        href: "/login",
+      },
+      {
+        icon: IoMdPersonAdd,
+        label: "회원가입",
+        active: pathname === "/register",
+        href: "/register",
+      },
+      {
+        icon: FaKey,
+        label: "API키",
+        active: pathname === "/apikey",
+        href: "/apikey",
       },
       // {
       //   icon: BsImages,
